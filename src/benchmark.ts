@@ -41,7 +41,13 @@ export const benchmark = ({
 
   if (opsPerSecondNoble > opsPerSecondLibsodium) {
     nobleRow.style.background = "lightgreen";
+    const fasterBy = opsPerSecondNoble / opsPerSecondLibsodium;
+    const libsodiumRow = row.insertCell();
+    libsodiumRow.textContent = fasterBy.toFixed(1);
   } else {
     libsodiumRow.style.background = "lightgreen";
+    const fasterBy = opsPerSecondLibsodium / opsPerSecondNoble;
+    const nobleRow = row.insertCell();
+    nobleRow.textContent = fasterBy.toFixed(1);
   }
 };

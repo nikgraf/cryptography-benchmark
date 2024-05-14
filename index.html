@@ -1,13 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
+    <style>
+      table {
+        margin: 0 auto;
+      }
+
+      table {
+        color: #333;
+        background: white;
+        border: 1px solid grey;
+        border-collapse: collapse;
+      }
+
+      table th,
+      table td {
+        padding: 0.5em;
+        border: 1px solid lightgrey;
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <div id="app">
+      <div>
+        <h1>Benchmark</h1>
+        <p id="loading">Running benchmarks (this takes a while)</p>
+        <p>
+          ATTENTION: Having DevTools open or not has quite an impact on
+          Libsodium performance!!!
+        </p>
+        <table>
+          <tr>
+            <th>Operation</th>
+            <th>Source</th>
+            <th>Noble ops/sec</th>
+            <th>Libsodium ops/sec</th>
+            <th>Factor faster</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts" defer></script>
   </body>
 </html>
