@@ -1,4 +1,4 @@
-import { benchmarkSigning } from "./benchmarkSigning.js";
+import { benchmarkXChacha20 } from "./benchmarkXChacha20.js";
 import "./styles.css";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
@@ -18,6 +18,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
-benchmarkSigning();
+await new Promise((resolve) => setTimeout(resolve, 50));
+
+// benchmarkSigning();
+benchmarkXChacha20();
 
 document.querySelector("#loading")!.remove();

@@ -13,6 +13,7 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
+    "@noble/ciphers": "^0.5.3",
     "@noble/curves": "^1.4.0",
     "@types/libsodium-wrappers": "^0.7.14",
     "libsodium-wrappers": "^0.7.13"

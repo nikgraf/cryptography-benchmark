@@ -10,6 +10,7 @@ import {
 
 export const benchmarkSigning = async () => {
   await sodium.ready;
+
   benchmark({
     operation: "ed25519 keypair generation",
     sourceName: "",
