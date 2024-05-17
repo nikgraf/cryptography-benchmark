@@ -1,6 +1,8 @@
 # Cryptography Benchmark
 
-This repository contains a benchmark comparing the performance of various cryptographic libraries in Javascript.
+This repository contains a benchmark comparing the performance of cryptographic libraries in Javascript.
+
+Currently testing `@noble` and `libsodium-wrappers`.
 
 ## Development
 
