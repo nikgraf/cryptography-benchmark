@@ -1,8 +1,8 @@
-export const tenBytes = new Uint8Array([
-  79, 179, 74, 85, 252, 192, 99, 112, 23, 160,
-]);
+const tenBytes = new Uint8Array([79, 179, 74, 85, 252, 192, 99, 112, 23, 160]);
 
-export const oneKiloByte = new Uint8Array([
+export const getTenBytes = () => tenBytes;
+
+const oneKiloByte = new Uint8Array([
   116, 67, 89, 46, 177, 176, 80, 64, 133, 50, 210, 40, 191, 1, 100, 230, 193,
   86, 8, 193, 53, 117, 122, 1, 51, 248, 158, 48, 99, 137, 114, 202, 126, 191,
   244, 67, 183, 170, 16, 205, 60, 64, 150, 217, 165, 89, 162, 25, 9, 144, 11,
@@ -65,15 +65,31 @@ export const oneKiloByte = new Uint8Array([
   103, 230, 151, 197, 23, 205, 246, 227, 18,
 ]);
 
-export let oneHundredKiloBytes = new Uint8Array();
-for (let i = 0; i < 100; i++) {
-  oneHundredKiloBytes = new Uint8Array([
-    ...oneHundredKiloBytes,
-    ...oneKiloByte,
-  ]);
-}
+export const getOneKiloByte = () => oneKiloByte;
 
-export let oneMegaByte = new Uint8Array();
-for (let i = 0; i < 1000; i++) {
-  oneMegaByte = new Uint8Array([...oneMegaByte, ...oneKiloByte]);
-}
+let oneHundredKiloBytes = new Uint8Array();
+
+// defer this work to avoid blocking the main thread on start
+export const getOneHundredKiloBytes = () => {
+  if (oneHundredKiloBytes.length === 0) {
+    for (let i = 0; i < 100; i++) {
+      oneHundredKiloBytes = new Uint8Array([
+        ...oneHundredKiloBytes,
+        ...oneKiloByte,
+      ]);
+    }
+  }
+  return oneHundredKiloBytes;
+};
+
+let oneMegaByte = new Uint8Array();
+
+// defer this work to avoid blocking the main thread on start
+export const getOneMegaByte = () => {
+  if (oneMegaByte.length === 0) {
+    for (let i = 0; i < 1000; i++) {
+      oneMegaByte = new Uint8Array([...oneMegaByte, ...oneKiloByte]);
+    }
+  }
+  return oneMegaByte;
+};

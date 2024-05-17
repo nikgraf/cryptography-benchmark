@@ -3,16 +3,21 @@ import { randomBytes } from "@noble/ciphers/webcrypto";
 import sodium from "libsodium-wrappers";
 import { benchmark } from "./benchmark.js";
 import {
-  oneHundredKiloBytes,
-  oneKiloByte,
-  oneMegaByte,
-  tenBytes,
+  getOneHundredKiloBytes,
+  getOneKiloByte,
+  getOneMegaByte,
+  getTenBytes,
 } from "./data";
-const key = randomBytes(32);
-const nonce = randomBytes(24);
 
 export const benchmarkXChacha20 = async () => {
   await sodium.ready;
+
+  const key = randomBytes(32);
+  const nonce = randomBytes(24);
+  const tenBytes = getTenBytes();
+  const oneKiloByte = getOneKiloByte();
+  const oneHundredKiloBytes = getOneHundredKiloBytes();
+  const oneMegaByte = getOneMegaByte();
 
   benchmark({
     operation: "xchacha20poly1305 key generation (32byte",
@@ -23,6 +28,7 @@ export const benchmarkXChacha20 = async () => {
     libsodiumCallback: () => {
       const key = sodium.crypto_aead_xchacha20poly1305_ietf_keygen();
     },
+    iterations: 5000,
   });
 
   benchmark({
@@ -41,7 +47,7 @@ export const benchmarkXChacha20 = async () => {
         key
       );
     },
-    iterations: 2000,
+    iterations: 5000,
   });
 
   benchmark({
@@ -60,7 +66,7 @@ export const benchmarkXChacha20 = async () => {
         key
       );
     },
-    iterations: 1000,
+    iterations: 2000,
   });
 
   benchmark({
@@ -79,7 +85,7 @@ export const benchmarkXChacha20 = async () => {
         key
       );
     },
-    iterations: 100,
+    iterations: 200,
   });
 
   benchmark({
@@ -98,7 +104,7 @@ export const benchmarkXChacha20 = async () => {
         key
       );
     },
-    iterations: 10,
+    iterations: 20,
   });
 
   const chacha = xchacha20poly1305(key, nonce);
@@ -122,7 +128,7 @@ export const benchmarkXChacha20 = async () => {
         key
       );
     },
-    iterations: 2000,
+    iterations: 10000,
   });
 
   benchmark({
@@ -140,7 +146,7 @@ export const benchmarkXChacha20 = async () => {
         key
       );
     },
-    iterations: 1000,
+    iterations: 2000,
   });
 
   benchmark({
@@ -158,7 +164,7 @@ export const benchmarkXChacha20 = async () => {
         key
       );
     },
-    iterations: 100,
+    iterations: 200,
   });
 
   benchmark({
@@ -176,6 +182,6 @@ export const benchmarkXChacha20 = async () => {
         key
       );
     },
-    iterations: 10,
+    iterations: 20,
   });
 };

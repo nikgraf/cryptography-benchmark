@@ -34,10 +34,20 @@ export const benchmark = ({
     libsodiumCallback(iteration);
   }
   const endLibsodium = performance.now();
+
   const opsPerSecondLibsodium =
     (iterationsWithDefault / (endLibsodium - startLibsodium)) * 1000;
   const libsodiumRow = row.insertCell();
   libsodiumRow.textContent = Math.round(opsPerSecondLibsodium).toString();
+
+  console.log(
+    operation,
+    sourceName,
+    iterationsWithDefault,
+    endLibsodium,
+    startLibsodium,
+    opsPerSecondLibsodium
+  );
 
   if (opsPerSecondNoble > opsPerSecondLibsodium) {
     nobleRow.style.background = "lightgreen";

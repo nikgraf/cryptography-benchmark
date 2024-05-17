@@ -2,14 +2,19 @@ import { ed25519 } from "@noble/curves/ed25519";
 import sodium from "libsodium-wrappers";
 import { benchmark } from "./benchmark.js";
 import {
-  oneHundredKiloBytes,
-  oneKiloByte,
-  oneMegaByte,
-  tenBytes,
+  getOneHundredKiloBytes,
+  getOneKiloByte,
+  getOneMegaByte,
+  getTenBytes,
 } from "./data";
 
 export const benchmarkSigning = async () => {
   await sodium.ready;
+
+  const tenBytes = getTenBytes();
+  const oneKiloByte = getOneKiloByte();
+  const oneHundredKiloBytes = getOneHundredKiloBytes();
+  const oneMegaByte = getOneMegaByte();
 
   benchmark({
     operation: "ed25519 keypair generation",
@@ -21,6 +26,7 @@ export const benchmarkSigning = async () => {
     libsodiumCallback: () => {
       const keyPair = sodium.crypto_sign_keypair();
     },
+    iterations: 5000,
   });
 
   const noblePriv = ed25519.utils.randomPrivateKey();
@@ -38,6 +44,7 @@ export const benchmarkSigning = async () => {
         sodiumKeyPair.privateKey
       );
     },
+    iterations: 5000,
   });
 
   benchmark({
@@ -52,7 +59,7 @@ export const benchmarkSigning = async () => {
         sodiumKeyPair.privateKey
       );
     },
-    iterations: 1000,
+    iterations: 2000,
   });
 
   benchmark({
@@ -67,7 +74,7 @@ export const benchmarkSigning = async () => {
         sodiumKeyPair.privateKey
       );
     },
-    iterations: 100,
+    iterations: 200,
   });
 
   benchmark({
@@ -82,7 +89,7 @@ export const benchmarkSigning = async () => {
         sodiumKeyPair.privateKey
       );
     },
-    iterations: 10,
+    iterations: 20,
   });
 
   const pub = ed25519.getPublicKey(noblePriv);
@@ -113,6 +120,7 @@ export const benchmarkSigning = async () => {
         pub
       );
     },
+    iterations: 5000,
   });
 
   benchmark({
@@ -128,7 +136,7 @@ export const benchmarkSigning = async () => {
         pub
       );
     },
-    iterations: 1000,
+    iterations: 2000,
   });
 
   benchmark({
@@ -148,7 +156,7 @@ export const benchmarkSigning = async () => {
         pub
       );
     },
-    iterations: 100,
+    iterations: 200,
   });
 
   benchmark({
@@ -164,6 +172,6 @@ export const benchmarkSigning = async () => {
         pub
       );
     },
-    iterations: 10,
+    iterations: 20,
   });
 };

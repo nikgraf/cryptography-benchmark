@@ -1,7 +1,17 @@
 import { benchmarkSigning } from "./benchmarkSigning.js";
 import { benchmarkXChacha20 } from "./benchmarkXChacha20.js";
 
-benchmarkSigning();
-benchmarkXChacha20();
+const run = async () => {
+  await benchmarkSigning();
+  await benchmarkXChacha20();
+};
 
-document.querySelector("#loading")!.remove();
+const runBenchmarkButton = document.getElementById("run-benchmark");
+runBenchmarkButton?.addEventListener("click", async () => {
+  runBenchmarkButton.setAttribute("disabled", "disabled");
+
+  setTimeout(async () => {
+    await run();
+    runBenchmarkButton.removeAttribute("disabled");
+  }, 100);
+});
