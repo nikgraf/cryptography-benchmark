@@ -71,6 +71,7 @@ let oneHundredKiloBytes = new Uint8Array();
 
 // defer this work to avoid blocking the main thread on start
 export const getOneHundredKiloBytes = () => {
+  console.log("create oneHundredKiloBytes data array");
   if (oneHundredKiloBytes.length === 0) {
     for (let i = 0; i < 100; i++) {
       oneHundredKiloBytes = new Uint8Array([
@@ -86,6 +87,7 @@ let oneMegaByte = new Uint8Array();
 
 // defer this work to avoid blocking the main thread on start
 export const getOneMegaByte = () => {
+  console.log("create oneMegaByte data array");
   if (oneMegaByte.length === 0) {
     for (let i = 0; i < 1000; i++) {
       oneMegaByte = new Uint8Array([...oneMegaByte, ...oneKiloByte]);
