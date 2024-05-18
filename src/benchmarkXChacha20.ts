@@ -23,10 +23,10 @@ export const benchmarkXChacha20 = async () => {
     operation: "xchacha20poly1305 key generation (32byte",
     sourceName: "",
     nobleCallback: () => {
-      const key = randomBytes(32);
+      randomBytes(32);
     },
     libsodiumCallback: () => {
-      const key = sodium.crypto_aead_xchacha20poly1305_ietf_keygen();
+      sodium.crypto_aead_xchacha20poly1305_ietf_keygen();
     },
     iterations: 5000,
   });
@@ -36,10 +36,10 @@ export const benchmarkXChacha20 = async () => {
     sourceName: "10 Bytes",
     nobleCallback: () => {
       const chacha = xchacha20poly1305(key, nonce);
-      const ciphertext = chacha.encrypt(tenBytes);
+      chacha.encrypt(tenBytes);
     },
     libsodiumCallback: () => {
-      const ciphertext = sodium.crypto_aead_xchacha20poly1305_ietf_encrypt(
+      sodium.crypto_aead_xchacha20poly1305_ietf_encrypt(
         tenBytes,
         null,
         null,
@@ -55,10 +55,10 @@ export const benchmarkXChacha20 = async () => {
     sourceName: "1 KB",
     nobleCallback: () => {
       const chacha = xchacha20poly1305(key, nonce);
-      const ciphertext = chacha.encrypt(oneKiloByte);
+      chacha.encrypt(oneKiloByte);
     },
     libsodiumCallback: () => {
-      const ciphertext = sodium.crypto_aead_xchacha20poly1305_ietf_encrypt(
+      sodium.crypto_aead_xchacha20poly1305_ietf_encrypt(
         oneKiloByte,
         null,
         null,
@@ -74,10 +74,10 @@ export const benchmarkXChacha20 = async () => {
     sourceName: "100 KB",
     nobleCallback: () => {
       const chacha = xchacha20poly1305(key, nonce);
-      const ciphertext = chacha.encrypt(oneHundredKiloBytes);
+      chacha.encrypt(oneHundredKiloBytes);
     },
     libsodiumCallback: () => {
-      const ciphertext = sodium.crypto_aead_xchacha20poly1305_ietf_encrypt(
+      sodium.crypto_aead_xchacha20poly1305_ietf_encrypt(
         oneHundredKiloBytes,
         null,
         null,
@@ -93,10 +93,10 @@ export const benchmarkXChacha20 = async () => {
     sourceName: "1 MB",
     nobleCallback: () => {
       const chacha = xchacha20poly1305(key, nonce);
-      const ciphertext = chacha.encrypt(oneMegaByte);
+      chacha.encrypt(oneMegaByte);
     },
     libsodiumCallback: () => {
-      const ciphertext = sodium.crypto_aead_xchacha20poly1305_ietf_encrypt(
+      sodium.crypto_aead_xchacha20poly1305_ietf_encrypt(
         oneMegaByte,
         null,
         null,
@@ -117,10 +117,10 @@ export const benchmarkXChacha20 = async () => {
     operation: "xchacha20poly1305 decrypt",
     sourceName: "10 Bytes",
     nobleCallback: () => {
-      const plaintext = chacha.decrypt(ciphertextTenBytes);
+      chacha.decrypt(ciphertextTenBytes);
     },
     libsodiumCallback: () => {
-      const plaintext = sodium.crypto_aead_xchacha20poly1305_ietf_decrypt(
+      sodium.crypto_aead_xchacha20poly1305_ietf_decrypt(
         null,
         ciphertextTenBytes,
         null,
@@ -135,10 +135,10 @@ export const benchmarkXChacha20 = async () => {
     operation: "xchacha20poly1305 decrypt",
     sourceName: "1 KB",
     nobleCallback: () => {
-      const plaintext = chacha.decrypt(ciphertextOneKiloByte);
+      chacha.decrypt(ciphertextOneKiloByte);
     },
     libsodiumCallback: () => {
-      const plaintext = sodium.crypto_aead_xchacha20poly1305_ietf_decrypt(
+      sodium.crypto_aead_xchacha20poly1305_ietf_decrypt(
         null,
         ciphertextOneKiloByte,
         null,
@@ -153,10 +153,10 @@ export const benchmarkXChacha20 = async () => {
     operation: "xchacha20poly1305 decrypt",
     sourceName: "100 KB",
     nobleCallback: () => {
-      const plaintext = chacha.decrypt(ciphertextOneHundredKiloBytes);
+      chacha.decrypt(ciphertextOneHundredKiloBytes);
     },
     libsodiumCallback: () => {
-      const plaintext = sodium.crypto_aead_xchacha20poly1305_ietf_decrypt(
+      sodium.crypto_aead_xchacha20poly1305_ietf_decrypt(
         null,
         ciphertextOneHundredKiloBytes,
         null,
@@ -171,10 +171,10 @@ export const benchmarkXChacha20 = async () => {
     operation: "xchacha20poly1305 decrypt",
     sourceName: "1 MB",
     nobleCallback: () => {
-      const plaintext = chacha.decrypt(ciphertextOneMegaByte);
+      chacha.decrypt(ciphertextOneMegaByte);
     },
     libsodiumCallback: () => {
-      const plaintext = sodium.crypto_aead_xchacha20poly1305_ietf_decrypt(
+      sodium.crypto_aead_xchacha20poly1305_ietf_decrypt(
         null,
         ciphertextOneMegaByte,
         null,

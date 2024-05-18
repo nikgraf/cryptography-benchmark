@@ -21,10 +21,10 @@ export const benchmarkSigning = async () => {
     sourceName: "",
     nobleCallback: () => {
       const priv = ed25519.utils.randomPrivateKey();
-      const pub = ed25519.getPublicKey(priv);
+      ed25519.getPublicKey(priv);
     },
     libsodiumCallback: () => {
-      const keyPair = sodium.crypto_sign_keypair();
+      sodium.crypto_sign_keypair();
     },
     iterations: 5000,
   });
@@ -36,13 +36,10 @@ export const benchmarkSigning = async () => {
     operation: "ed25519 sign",
     sourceName: "10 Bytes",
     nobleCallback: () => {
-      const sig = ed25519.sign(tenBytes, noblePriv);
+      ed25519.sign(tenBytes, noblePriv);
     },
     libsodiumCallback: () => {
-      const sig = sodium.crypto_sign_detached(
-        tenBytes,
-        sodiumKeyPair.privateKey
-      );
+      sodium.crypto_sign_detached(tenBytes, sodiumKeyPair.privateKey);
     },
     iterations: 5000,
   });
@@ -51,13 +48,10 @@ export const benchmarkSigning = async () => {
     operation: "ed25519 sign",
     sourceName: "1 KB",
     nobleCallback: () => {
-      const sig = ed25519.sign(oneKiloByte, noblePriv);
+      ed25519.sign(oneKiloByte, noblePriv);
     },
     libsodiumCallback: () => {
-      const sig = sodium.crypto_sign_detached(
-        oneKiloByte,
-        sodiumKeyPair.privateKey
-      );
+      sodium.crypto_sign_detached(oneKiloByte, sodiumKeyPair.privateKey);
     },
     iterations: 2000,
   });
@@ -66,10 +60,10 @@ export const benchmarkSigning = async () => {
     operation: "ed25519 sign",
     sourceName: "100 KB",
     nobleCallback: () => {
-      const sig = ed25519.sign(oneHundredKiloBytes, noblePriv);
+      ed25519.sign(oneHundredKiloBytes, noblePriv);
     },
     libsodiumCallback: () => {
-      const sig = sodium.crypto_sign_detached(
+      sodium.crypto_sign_detached(
         oneHundredKiloBytes,
         sodiumKeyPair.privateKey
       );
@@ -81,13 +75,10 @@ export const benchmarkSigning = async () => {
     operation: "ed25519 sign",
     sourceName: "1 MB",
     nobleCallback: () => {
-      const sig = ed25519.sign(oneMegaByte, noblePriv);
+      ed25519.sign(oneMegaByte, noblePriv);
     },
     libsodiumCallback: () => {
-      const sig = sodium.crypto_sign_detached(
-        oneMegaByte,
-        sodiumKeyPair.privateKey
-      );
+      sodium.crypto_sign_detached(oneMegaByte, sodiumKeyPair.privateKey);
     },
     iterations: 20,
   });
@@ -111,14 +102,10 @@ export const benchmarkSigning = async () => {
     operation: "ed25519 verify",
     sourceName: "10 Bytes",
     nobleCallback: () => {
-      const result = ed25519.verify(sigTenBytes, tenBytes, pub);
+      ed25519.verify(sigTenBytes, tenBytes, pub);
     },
     libsodiumCallback: () => {
-      const result = sodium.crypto_sign_verify_detached(
-        sigTenBytes,
-        tenBytes,
-        pub
-      );
+      sodium.crypto_sign_verify_detached(sigTenBytes, tenBytes, pub);
     },
     iterations: 5000,
   });
@@ -127,14 +114,10 @@ export const benchmarkSigning = async () => {
     operation: "ed25519 verify",
     sourceName: "1 KB",
     nobleCallback: () => {
-      const result = ed25519.verify(sigOneKiloByte, oneKiloByte, pub);
+      ed25519.verify(sigOneKiloByte, oneKiloByte, pub);
     },
     libsodiumCallback: () => {
-      const result = sodium.crypto_sign_verify_detached(
-        sigOneKiloByte,
-        oneKiloByte,
-        pub
-      );
+      sodium.crypto_sign_verify_detached(sigOneKiloByte, oneKiloByte, pub);
     },
     iterations: 2000,
   });
@@ -143,14 +126,10 @@ export const benchmarkSigning = async () => {
     operation: "ed25519 verify",
     sourceName: "100 KB",
     nobleCallback: () => {
-      const result = ed25519.verify(
-        sigOneHundredKiloBytes,
-        oneHundredKiloBytes,
-        pub
-      );
+      ed25519.verify(sigOneHundredKiloBytes, oneHundredKiloBytes, pub);
     },
     libsodiumCallback: () => {
-      const result = sodium.crypto_sign_verify_detached(
+      sodium.crypto_sign_verify_detached(
         sigOneHundredKiloBytes,
         oneHundredKiloBytes,
         pub
@@ -163,14 +142,10 @@ export const benchmarkSigning = async () => {
     operation: "ed25519 verify",
     sourceName: "1 MB",
     nobleCallback: () => {
-      const result = ed25519.verify(sigOneMegaByte, oneMegaByte, pub);
+      ed25519.verify(sigOneMegaByte, oneMegaByte, pub);
     },
     libsodiumCallback: () => {
-      const result = sodium.crypto_sign_verify_detached(
-        sigOneMegaByte,
-        oneMegaByte,
-        pub
-      );
+      sodium.crypto_sign_verify_detached(sigOneMegaByte, oneMegaByte, pub);
     },
     iterations: 20,
   });
